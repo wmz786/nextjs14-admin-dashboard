@@ -24,7 +24,7 @@ export const addUser = async (formData) => {
   redirect("/dashboard/users");
 };
 
-export const addProducts = async (formData) => {
+export const addProduct = async (formData) => {
   const data = Object.fromEntries(formData);
   try {
     connectToDB();
@@ -38,4 +38,17 @@ export const addProducts = async (formData) => {
   revalidatePath("/dashboard/products");
 
   redirect("/dashboard/products");
+};
+
+export const deleteProduct = async (formData) => {
+  const { id } = Object.fromEntries(formData);
+  try {
+    connectToDB();
+    await Product.findByIdAndDelete(id);
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to delete product");
+  }
+  //for refetching data
+  revalidatePath("/dashboard/products");
 };
