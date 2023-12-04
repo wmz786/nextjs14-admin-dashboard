@@ -17,6 +17,17 @@ export const fetchUsers = async (q, page) => {
   }
 };
 
+export const fetchUser = async (id) => {
+  try {
+    connectToDB();
+    const user = await User.findById(id);
+    return user;
+  } catch (err) {
+    console.log(err);
+    throw new Error("Failed to fetch user!");
+  }
+};
+
 export const fetchProducts = async (q, page) => {
   const regex = new RegExp(q, "i");
   const ITEM_PER_PAGE = 2;

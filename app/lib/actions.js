@@ -65,3 +65,34 @@ export const deleteUser = async (formData) => {
   //for refetching data
   revalidatePath("/dashboard/products");
 };
+
+export const updateUser = async (formData) => {
+  const { id, username, email, password, phone, address, isAdmin, isActive } =
+    Object.fromEntries(formData);
+  try {
+    connectToDB();
+    const updateFields = {
+      username,
+      email,
+      password,
+      phone,
+      address,
+      isAdmin,
+      isActive,
+    };
+
+    Object.keys(updateFields).forEach(
+      (key) =>
+        (updateFields[key] === "" || undefined) && delete updateFields[key]
+    );
+
+    await User.findByIdAndUpdate(id, updateFields);
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to update user");
+  }
+  //for refetching data
+  revalidatePath("/dashboard/users");
+
+  redirect("/dashboard/users");
+};
