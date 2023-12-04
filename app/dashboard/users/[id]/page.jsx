@@ -18,35 +18,15 @@ const SingleUserPage = async ({ params }) => {
         <form action={updateUser} className={styles.form}>
           <input type="hidden" name="id" value={user.id} />
           <label>Username</label>
-          <input
-            type="text"
-            name="username"
-            placeholder="John Doe"
-            value={user.username}
-          />
+          <input type="text" name="username" placeholder={user.username} />
           <label>Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="johnDoe@gmail.com"
-            value={user.email}
-          />
+          <input type="email" name="email" placeholder={user.email} />
           <label>Password</label>
           <input type="password" name="password" value={user.password} />
           <label>Phone</label>
-          <input
-            type="text"
-            name="phone"
-            placeholder="+1233455"
-            value={user.phone}
-          />
+          <input type="text" name="phone" placeholder={user.phone} />
           <label>Address</label>
-          <textarea
-            type="text"
-            name="address"
-            placeholder="New York"
-            value={user.address}
-          />
+          <textarea type="text" name="address" placeholder={user.address} />
           <label>Is Admin?</label>
           <select name="isAdmin" id="isAdmin">
             <option value={true} selected={user.isAdmin}>
