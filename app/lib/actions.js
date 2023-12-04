@@ -130,7 +130,6 @@ export const updateProduct = async (formData) => {
 
 export const authenticate = async (formData) => {
   const { username, password } = Object.fromEntries(formData);
-  console.log(username);
   try {
     await signIn("credentials", { username, password });
   } catch (error) {
