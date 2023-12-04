@@ -36,4 +36,21 @@ export const { signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+  // ADD ADDITIONAL INFORMATION TO SESSION
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.username = user.username;
+        token.img = user.img;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.username = token.username;
+        session.user.img = token.img;
+      }
+      return session;
+    },
+  },
 });
