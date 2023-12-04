@@ -13,6 +13,7 @@ import {
 } from "react-icons/md";
 import styles from "./sidebar.module.css";
 import MenuLink from "./menuLink/menuLink";
+import { signOut } from "@/app/auth";
 
 const menuItems = [
   {
@@ -103,9 +104,16 @@ const Sidebar = () => {
           </li>
         ))}
       </ul>
-      <button className={styles.logout}>
-        <MdLogout /> Logout
-      </button>
+      <form
+        action={async () => {
+          "use server";
+          await signOut();
+        }}
+      >
+        <button className={styles.logout}>
+          <MdLogout /> Logout
+        </button>
+      </form>
     </div>
   );
 };
